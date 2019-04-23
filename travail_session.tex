@@ -1,0 +1,194 @@
+
+%Packages
+
+\documentclass[twoside,twocolumn]{article}
+
+
+\usepackage{underscore}
+\usepackage[sc]{mathpazo}
+\linespread{1.05}
+\usepackage{microtype}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry}
+\usepackage[small,labelfont=bf,up,textfont=it,up]{caption}
+\usepackage{booktabs}
+
+\usepackage{lettrine}
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep}
+\usepackage{abstract}
+\renewcommand{\abstractnamefont}{\normalfont\bfseries}
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape}
+\usepackage{titlesec}
+\renewcommand\thesection{\Roman{section}}
+\renewcommand\thesubsection{\roman{subsection}}
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{}
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[C]{Université de Sherbrooke$ \bullet$ Avril 2019}
+\fancyfoot[C]{\thepage}
+\usepackage{titling}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{natbib}
+\bibliographystyle{apalike}
+
+
+%-----------------------------------------------------------------------------
+%	Section Titre
+%------------------------------------------------------------------------------
+
+\setlength{\droptitle}{-4\baselineskip}
+
+\pretitle{\begin{center}\Huge\bfseries}
+\posttitle{\end{center}}
+\title{L'influence des habitudes alimentaires, du sexe et de la région sur les réseaux écologiques}
+\author{
+\textsc{Josiane Côté Audet, Gabriel Boilard, Élyse Paquette et Kathryne Moreau}\\ [1ex]
+\normalsize Université de Sherbrooke\\
+\normalsize \href{mailto:cotj3115@Usherbrooke.ca}{cotj3115@Usherbrooke.ca}
+}
+
+\date{23 avril 2019}
+
+\renewcommand{\maketitlehookd}{
+
+\begin{abstract}
+\noindent L'étude sur les réseaux écologiques peut être effectué grâce aux observations des tendances comportementales entre individus humains d'un même programme universitaire. En voulant comparer les réseaux de collaboration entre étudiants et les réseaux écologiques, nous nous sommes axés sur: l'effet du sexe des étudiants sur le nombre de liens par étudiant avec des personnes différentes, l'effet la région d'origine sur la fréquences des liens entre deux étudiants et sur la relation entre la diète des individus et le nombre de liens entre ces diètes. Il n'y a pas de d'effet du sexe sur le nombre de liens avec des personnes différentes par étudiant. Aussi, les individus font plus de liens entre eux lorsqu'ils ne viennent pas de la même région. Finalement, nous avons observé que plus de liens étaient faits entre omnivore-omnivore qu'entre omnivore-végétarien. Cependant, ceci est probablement dû à la plus grande proportion d'omnivores dans la classe. La probabilité que deux élèves de même diète soit reliés n'a pas été déterminante. Nous en sommes donc venus à la conclusion que les réseux écologiques et le réseau d'étudiants sont différents.
+
+\end{abstract}
+}
+
+%------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+
+%INTRODUCTION------------------------------------------------------
+
+
+\section{Introduction}
+
+\lettrine[nindent=0em,lines=3]{U}
+n réseau écologique est le réseau de liens entre les différents individus ou espèces d'un écosystème. Ces liens peuvent représenter une relation antagoniste (prédateur-proie) ou mutualiste (pollinisateur-plante). Ceci implique qu'un changement sur un espèce peut aller affecter plusieurs autres espèces interreliées. Par exemple, l'élimination de plantes exotiques peut entraîner une pollinisation réduite d'une plante indigène rare par des changements dans la population de pollinisateurs qui se nourrissent à la fois de plantes indigènes et exotiques. De plus, les liens dans le réseau d'interactions écologiques peuvent être faibles ou forts. Plusieurs études ont démontré que les réseaux sont composés de quelques interactions fortes au sein d'une matrice d'interactions faibles. Le degré (ou ‘connectivité') de ces interactions est évalué par le nombre de liens impliquant chaque espèce. La diversité des interactions est directement proportionnelle à la diversité d'espèces présentent dans un réseau \citep{tylianakis2010conservation}. Elle est généralement mesurée par rapport au nombre d'espèces dans le réseau.  Ces réseaux écologiques prennent de plus en plus d'expansion dans le monde de la science. Plusieurs études ont démontré que les réseaux d'interactions sont particulièrement sensibles aux changements environnementaux causés par les activités anthropologiques, d'où l'importance de bien les comprendre \citep{morris2010anthropogenic}.
+
+Le but de l'étude est de déterminer si le réseau de collaborations entre des étudiants du même programme universitaire est semblable aux réseaux écologiques. La question a été séparée en trois parties. Après avoir fait le réseau des interactions des étudiants, nous avons déterminé s'il y avait un effet du sexe sur le nombre de liens faits avec des personnes. Nous avons ensuite déterminé s'il y avait un effet de la région d'origine sur le lien entre deux étudiants. Finalement, nous avons généré un tableau du nombre de liens dans le réseau, classés selon la diète des individus.
+
+L'hypothèse nulle (H0) est que le réseau d'étudiants est semblable aux réseaux écologiques et l'hypothèse alternative (H1) est que le réseau d'étudiants est différent de ceux-ci.
+
+
+%MÉTHODES------------------------------------------------
+
+\section{Méthodes et Résultats}
+
+
+\subsection{Prise de données et manipulations}
+
+Les données ont été récoltées en format excel par les étudiants du cours BIO500 - Méthodes en écologie computationnelle de l'Université de Sherbrooke (Sherbrooke, Qc). Les fichiers Excel ont été créés par 7 équipes, pour un nombre de 26 étudiants au total. Avant de faire notre analyse, les données ont été transférées en format .csv pour les manipuler dans RStudio (version 1.0.153).  Tout d'abord, une uniformisation des données dans RStudio a été nécessaire vu le grand nombre d'erreurs et de différences entre les fichiers. Les tables bd_cours, bd_liens et bd_etudiants ont donc été créées, regroupant les fichiers de toutes les équipes (nettoyage_equipes_1-7.r). Ensuite, des tables SQL ont été  créées (injection_données.R) pour générer les différents graphiques nécessaires à l'analyse (figures_analyses.R).
+
+
+\subsection{Le réseau écologique des collaborations de tous les étudiants}
+
+Le i-graph de la figure 1, réalisé dans RStudio représente tous les étudiants de cours BIO500 qui ont fait des projets avec d'autres étudiants, pas uniquement dans ce cours, mais dans les cours  des 3 ans du bac. Pour des raisons de lisibilité, les étudiants qui n'étaient pas dans le cours ont été mis plus à l'extérieur, et les étudiants du cours ont été mis à l'intérieur.
+
+
+\subsection{Le réseau écologique des collaborations des étudiants du cours BIO500}
+
+
+Le i-graph de la figure 2, réalisé dans RStudio, représente tous les étudiants de cours BIO500 qui ont fait des projets avec d'autres étudiants, uniquement dans ce cours. Les individus ayant plus de liens se retrouvent éloignés du centre de la figure. La conformation choisie ne sert qu'à améliorer la lisibilité.
+
+
+\subsection{Les collaborations selon la diète des étudiants}
+
+Nous voulions savoir si les étudiants avaient tendance à collaborer entre eux selon leur diète, omnivore ou végétarienne, ou bien si les étudiants collaboraient entre eux même s'ils avait des diètes différences (tableau 1). Pour bien comprendre le phénomène, un tableau a été réalisé. Malheureusement, le tableau ne nous permet pas une analyse plus profonde, comme à savoir s'il y a une différence significative entre le nombre de collaborations entre étudiants de même diète et le nombre de collaborations entre étudiants de diète différente.
+
+
+\subsection{Les collaborations selon le sexe des étudiants}
+
+Nous voulions déterminer si les étudiants hommes collaboraient davantage avec différentes personnes que les femmes, ainsi que pour le sexe autre (figure 3). Pour répondre à la question, nous avons utilisé une régression linéaire simple. Pour ensuite pouvoir visualiser le résultat, nous avons créé un boxplot illustrant la médiane du nombre de collaborations différentes par étudiant, et ce, selon les trois catégories de sexe. Les femmes avaient en moyenne 22,13 collaborations différentes, les hommes avaient 22,77 collaborations différentes, et autre représentait un seul individu de 28 collaborations (donc pas une moyenne). Ce type de graphique nous permet de visualiser rapidement les données et d'observer un patron s'il y a lieu, normalement inobservable lorsqu'il y a beaucoup de données  \citep{williamson1989box}. Pour vérifier s'il y avait une influence du sexe, une analyse de variance ANOVA a été effectuée sur le modèle de régression. L'ANOVA nous a confirmé qu'il n'y avait pas de relation entre le sexe et le nombre de collaborations différentes, puisque l'analyse n'était pas significative (p = 0.5783).
+
+
+
+\subsection{Les collaborations selon la région de naissance}
+
+Nous nous sommes également penché sur la question à savoir s'il y avait un effet de la région de naissance sur le nombre de collaborations entre des étudiants (figure 4). Pour visualiser les données, nous avons créé un graphique de type plotjitter dans le but de bien distancer les points et de voir les fréquences de collaborations qui revenaient davantage. Par exemple, il y a beaucoup d'étudiants qui ont collaboré avec d'autres étudiants de même région une seule fois. La valeur de 0 représente les collaborations de régions différentes, et la valeur de 1 représentent les collaborations entre même région. La droite a été tracée grâce aux moyennes des deux catégories. Un test de t a été effectué, et nous avons obtenu une moyenne par étudiant de 2,237 collaborations de régions différentes, et une moyenne par étudiant de 1,643 collaborations de même région, pour une valeur significative de p-value = 0.0257. Pour entre autres bien visualiser le phénomène, nous n'avons pas pris en compte les collaborations qui comprenaient des étudiants sans région de naissance (valeur de NA). En effet, nous avons considéré que tous les étudiants pouvaient faire des liens, et ce qui nous intéressait c'est si les étudiants choisissaient plus souvent des coéquipiers de la même région ou pas. En d'autres mots, on ne rejette pas activement (on ne décide pas de rejeter) les autres personnes, mais on décide de se mettre en équipe avec une autres personne.De plus, le fait que nous n'étions pas avec tous les autres étudiants dans tous nos cours ne permet pas de dire que nous avons choisi de ne pas être avec eux. Finalement, ce modèle considérait que toutes les régions étaient représentées également à l'Université de Sherbrooke dans tous les cours.
+
+
+
+
+%DISCUSSION------------------------------------------------
+
+\section{Discussion}
+
+\subsection{Nombre de liens avec des personnes différentes selon le sexe}
+
+Nos résultats indiquent qu'il n'y a pas une différence significative entre les hommes et les femmes par rapport au nombre de collaborations avec des personnes différentes lors de travaux d'équipe (figure 3). Ce résultat est plus ou moins surprenant, lorsque nous comparons les différentes collaborations avec la dispersion chez les primates. En effet, les femelles d'espèces de primates ont tendance à rester en groupe tandis que les mâles ont tendance à faire de la dispersion et ce, pour des raisons reproductives. Les femelles restent ensemble afin de s'entraider. Les mâles vont se disperser afin de diminuer les risques de consanguinité et de pouvoir éviter la compétition entre mâles. Aussi, il y a un élément important par rapport à la limitation reproductive. Les femelles sont celles qui sont les plus restreintes dans la reproduction; elles ne peuvent pas se reproduire aussi rapidement que les mâles. Alors, les mâles auront tendance à faire plus de dispersion que les femelles, simplement parce qu'ils peuvent produire plus de jeunes dans un temps plus restreint. Par contre, comme nos résultats nous l'indique, il ne semble pas que ce soit en ce sens que les dispersions se produisent \citep{diaz2014no}. Dans la littérature, il y a en effet des contradictions par rapport à la dispersion des femelles. En fait, elle est dépendante de l'espèce. Certaines espèces de primates vont voir leurs femelles effectuer de la dispersion pour les mêmes raisons que les mâles font de la dispersion; pour éviter la consanguinité et pour avoir une progéniture avec une bonne variabilité génétique \citep{jack2009female}.
+
+Dans notre étude, le choix d'être avec plusieurs personnes différentes pour un projet ne signifie pas que les raisons reproductives de ce comportement sont conscientes. Nous croyons en fait que ces comportements sont exécutés dans une optique beaucoup plus complexe que de simples raisons reproductives. Aussi, dans la boîte à moustache, on remarque une troisième catégorie de sexe qui se nomme ‘'autre''. Nous ne pouvons prendre en considération cette donnée dans notre étude puisqu'il n'y a qu'un individu concerné.
+
+
+\subsection{Les collaborations entre individus selon leur diète}
+
+Plus de liens ont créés entre omnivore-omnivore qu'entre omnivore-végétarien. Par contre, ceci pourrait probablement dû à la plus grande proportion d'omnivores dans la classe. La probabilité que deux élèves de même diète soit reliés n'a pas été déterminée. Selon la littérature, l'élément qui relie deux individus par leur diète agit sous le principe de proie-prédateur. Les herbivores et les carnivores font partie du ‘'food web''. La densité des carnivores est fortement corrélée avec la densité des herbivores, puisque c'est leur source de nourriture. De manière semblable, une baisse de la densité de carnivores engendrerait une montée de celle des herbivores, créant ainsi un des liens dans la complexité du réseau. Donc, dans la nature, les liens entre des individus de diètes différentes sont beaucoup plus fort que les liens entre individus de même diètes \citep{paine1980food}.
+
+
+\subsection{Les collaborations selon la région de naissance}
+
+Il est possible de voir qu'il y a un effet significatif de la région de naissance sur le nombre de liens entre deux individus. En effet, il y aurait une plus grande fréquence de liens entre des personnes venant de régions différentes. Ce résultat nous a surpris au départ, puisque nous pensions que les étudiants de même région collaboraient davantage. Cependant, nous avons compris que cette relation peut être mise en parallèle avec le phénomène de dispersion. La distribution d'espèces par rapport à la grandeur de son habitat est un aspect inséparable de son interaction avec son environnement. Un individu d'une espèce se trouvant dans un réseau écologique complexe se trouve en situation de compétition de ressources. Une dispersion est donc favorisée lorsque l'environnement n'est pas composé de beaucoup de ressources. De plus, afin d'augmenter son succès reproducteur, un individu sera porter à se disperser, et ainsi éviter la consanguinité \citep{levin1974dispersion}. La dispersion pourrait donc être un comportement instinctif  retrouvé chez l'humain.
+
+
+%Conclusion----------------------------------
+
+\section{Conclusion}
+
+Selon nos analyses, nous croyons que le réseau d'étudiants du cour BIO500 n'est pas comparable à un réseau écologique. Plusieurs facteurs sociaux ou culturelles pourraient être la cause des différences. En effet, il serait très probable que ceux-ci prennent le dessus sur le comportement instinctif de l'humain \citep{nicholson1998hardwired}.
+
+\bibliography{references}
+
+
+%GRAPHIQUES........................................
+
+\section{Figures et tableau}
+
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{graphReseau.pdf}
+\caption {Le réseau écologique démontrant le nombre de collaborations entre les étudiants d'écologie du baccalauréat en Écologie 2019 pour les projets d'équipe du cours BIO500 (Méthodes en écologie computationnelle). Le nombre de collaborations est plus grand pour les pastilles (représentant chaque étudiant) sont plus pâles (tirant vers le blanc), alors que le nombre de collaborations est moins grand lorsque la couleur de la pastille est foncé (tirant vers le rouge).}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{graphReseauClasse.pdf}
+\caption {Le boxplot représente le nombre moyen de personnes différentes avec qui un étudiant collabore selon le sexe de l'étudiant en question. Le résultat n'est pas significatif, p = 0.5783}
+\end{figure}
+
+%Tableau
+\begin{table}[h]
+\resizebox{\linewidth}{!}{
+\input{tableauDiete.tex}
+}
+\caption{Le nombre de collaborations entre les étudiants de diète semblable en comparaison avec le nombre de collaborations entre les étudiants de diètes différentes. 421 liens sont de types omnivore-omnivore, 133 liens entre végétarien-omnivore, et 52 liens végétarien-végétarien. Il y avait 20 personnes de diète omnivore et 6 personnes de diète végétarienne au total.}
+\end{table}
+
+
+%GRAPHIQUES....................................
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{graphSexe.pdf}
+\caption {La fréquence des collaborations est représenté sous deux catégories, soit les collaborations entre étudiants de même région de naissance et les collaborations entre étudiants de différente région de naissance. La valeur de 0 représente les collaborations de régions différentes, et la valeur de 1 représentent les collaborations entre même région, pour une valeur significative de p-value = 0.0257}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{graphRegion.pdf}
+\caption{Le réseau écologique démontrant le nombre de collaborations entre les étudiants d'écologie du baccalauréat en Écologie 2019 pour les projets d'équipe dans les cours inscrits au programme (obligatoires et au choix). Le nombre de collaborations est plus grand pour les pastilles (représentant chaque étudiant) sont plus pâles (tirant vers le blanc), alors que le nombre de collaborations est moins grand lorsque la couleur de la pastille est foncé (tirant vers le rouge).}
+\end{figure}
+
+% BIBLIOGRAPHY----------------------------------------------------------------------
+
+%-----------------------------------------------------------------------------------
+
+\end{document}
